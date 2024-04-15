@@ -1,0 +1,54 @@
+//past this code on your html form page
+
+
+<?php
+$insert = true;
+if(isset($_POST['name'])){
+    
+    $server = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "trip"; // Specify your database name
+
+    
+    $con = mysqli_connect($server, $username, $password, $database);
+
+    
+    if(!$con){
+        die("connection to this database failed due to" . mysqli_connect_error());
+    }
+
+    
+    $name = $_POST['name'];
+    $gender = $_POST['gender'];
+    $age = $_POST['age'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $desc = $_POST['desc'];
+	//do this work first
+    //$sql = "INSERT INTO `trip` (`name`, enter your db field) VALUES ('$name',enter your variables)";
+
+    
+    if($con->query($sql) == true){
+        // Flag for successful insertion
+        $insert = false;
+    }
+    else{
+        echo "ERROR: $sql <br> $con->error";
+    }
+
+   
+    $con->close();
+}
+?>
+
+
+//past this code after html form 
+
+if($insert == false){
+        echo "<script>alert('Thank you! Your information is submitted ');</script>";
+    }
+    else{
+        echo "<script>alert('Sorry! Your information is not submitted ');</script>";
+
+    }
